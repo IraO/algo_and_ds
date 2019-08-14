@@ -42,3 +42,38 @@ class BinarySearchTree:
             return self.search(root.right, val)
         else:
             return root
+
+    def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
+        if not root:
+            return TreeNode(val)
+        
+        if val <= root.val:
+            root.left = self.insertIntoBST(root.left, val)
+        else:
+            root.right = self.insertIntoBST(root.right, val)
+        return root
+
+    def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+        if not root:
+            return root
+        
+        if key < root.val:
+            root.left = self.deleteNode(root.left, key)
+        elif key > root.val:
+            root.right = self.deleteNode(root.right, key)
+        else:
+            if not root.left:
+                return root.right
+            
+            elif not root.right:
+                return root.left
+            else:
+                root.val = self.minVal(root.right)
+                root.right = self.deleteNode(root.right, root.val)
+        return root
+    
+    def minVal(self, root):
+        curr = root
+        while curr.left:
+            curr = curr.left
+        return curr.val
