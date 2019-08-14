@@ -18,8 +18,21 @@ class BinarySearchTree:
         if root.right:
             res += self.inorder(root.right)
         return res
-    
-    def search(self, val: int) -> TreeNode:
+
+    def search(TreeNode, val: int) -> TreeNode:
+        if not self.root:
+            return None
+        curr = self.root
+        while curr:
+            if val < curr.val:
+                curr = curr.left
+            elif val > curr.val:
+                curr = curr.right
+            else:
+                return curr
+        return None
+     
+    def search_recursively(self, val: int) -> TreeNode:
         if not root:
             return None
         
